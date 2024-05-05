@@ -18,10 +18,13 @@ const pool = new Pool({
 
 const app = express();
 
-app.use(cors({
-    origin: ['https://cloud-run-xmanager-backend*','https://cloud-run-xmanager-frontend-2rnykusuka-uc.a.run.app*','https://*']
-}));
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 
+app.use(cors(corsOptions)) 
 
 app.get('/', async (req, res) => {
   await pool.query('INSERT INTO visits(created_at) VALUES(NOW())');
