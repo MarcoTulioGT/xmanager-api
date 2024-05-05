@@ -25,6 +25,12 @@ app.get('/', async (req, res) => {
   res.send(rows);
 });
 
+app.get(/invoices, async (req,res) => {
+    const {rows} = await pool.query('SELECT * FROM invoices WHERE invoice_date ORDER BY invoice_date asc');
+    console.table(rows); // prints the last 5 visits
+    res.send(rows);
+});
+
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, async () => {
   console.log('process.env: ', process.env);
