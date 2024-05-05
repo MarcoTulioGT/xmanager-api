@@ -1,7 +1,7 @@
 import express from 'express';
 import pg from 'pg';
 import {Connector} from '@google-cloud/cloud-sql-connector';
-
+import cors from 'cors';
 const {Pool} = pg;
 
 const connector = new Connector();
