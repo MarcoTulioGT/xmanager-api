@@ -18,6 +18,11 @@ const pool = new Pool({
 
 const app = express();
 
+app.use(cors({
+    origin: ['https://cloud-run-xmanager-backend*','http://*','https://*']
+}));
+
+
 app.get('/', async (req, res) => {
   await pool.query('INSERT INTO visits(created_at) VALUES(NOW())');
   const {rows} = await pool.query('SELECT created_at FROM visits ORDER BY created_at DESC LIMIT 5');
