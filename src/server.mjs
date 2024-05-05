@@ -19,7 +19,7 @@ const pool = new Pool({
 const app = express();
 
 app.use(cors({
-    origin: ['https://cloud-run-xmanager-backend*','http://*','https://*']
+    origin: ['https://cloud-run-xmanager-backend*','https://cloud-run-xmanager-frontend-2rnykusuka-uc.a.run.app*','https://*']
 }));
 
 
