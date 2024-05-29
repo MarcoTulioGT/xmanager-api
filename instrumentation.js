@@ -19,13 +19,13 @@ resource: new Resource({
   
 traceExporter: new OTLPTraceExporter({
 // optional - default url is http://localhost:4318/v1/traces
-url: 'http://35.202.29.2:4318/v1/traces',
+url: 'http://10.128.0.14:4318/v1/traces',
 // optional - collection of custom headers to be sent with each request, empty by default
 headers: {},
 }),
 metricReader: new PeriodicExportingMetricReader({
 exporter: new OTLPMetricExporter({
-url: 'http://35.202.29.2:4318/v1/metrics', // url is optional and can be omitted - default is http://localhost:4318/v1/metrics
+url: 'http://10.128.0.14:4318/v1/metrics', // url is optional and can be omitted - default is http://localhost:4318/v1/metrics
 headers: {}, // an optional object containing custom headers to be sent with each request
 concurrencyLimit: 1, // an optional limit on pending requests
 }),
