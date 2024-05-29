@@ -42,7 +42,7 @@ app.get('/invoices', async (req,res) => {
     res.send(rows);
 });
 
-const port = parseInt(process.env.PORT) || 8080;
+const port = parseInt(process.env.PORT) || 8081;
 app.listen(port, async () => {
   console.log('process.env: ', process.env);
   await pool.query(`CREATE TABLE IF NOT EXISTS visits (
