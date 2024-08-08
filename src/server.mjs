@@ -33,12 +33,12 @@ app.get('/', async (req, res) => {
   res.send(rows);
 });
 
-app.get('/invoices', async (req,res) => {
+app.get('/boxes', async (req,res) => {
     const dateStart = req.query.dateStart;
     const dateEnd = req.query.dateEnd;
     console.log(dateStart, dateStart)
-    const {rows} = await pool.query("SELECT * FROM invoices WHERE invoice_date BETWEEN '"+dateStart+"' and '"+dateEnd+"' ORDER BY invoice_date asc");
-    console.table(rows); // prints the last 5 visits
+    const {rows} = await pool.query("SELECT * FROM boxes");
+    console.table(rows); 
     res.send(rows);
 });
 
