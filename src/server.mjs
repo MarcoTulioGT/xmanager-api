@@ -45,7 +45,7 @@ app.get('/invoices', async (req,res) => {
 const port = parseInt(process.env.PORT) || 8081;
 app.listen(port, async () => {
   console.log('process.env: ', process.env);
-  await pool.query(`CREATE TABLE IF NOT EXISTS visits (
+  await pool.query(`CREATE TABLE IF NOT EXISTS public.visits (
     id SERIAL NOT NULL,
     created_at timestamp NOT NULL,
     PRIMARY KEY (id)
