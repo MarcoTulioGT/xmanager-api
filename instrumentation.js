@@ -19,7 +19,7 @@ resource: new Resource({
   
 traceExporter: new OTLPTraceExporter({
 // optional - default url is http://localhost:4318/v1/traces
-url: 'http://34.46.208.178:4318/v1/traces',
+url: 'http://34.41.106.145:4318/v1/traces',
 // optional - collection of custom headers to be sent with each request, empty by default
 headers: {},
 }),
