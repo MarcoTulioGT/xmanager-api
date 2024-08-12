@@ -1,7 +1,7 @@
 /*instrumentation.js*/
 const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
-const { Resource } = require('@opentelemetry/resources');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+const { Resource, envDetector, ProcessDetector} = require('@opentelemetry/resources');
+const { SEMRESATTRS_SERVICE_NAME } = require('@opentelemetry/semantic-conventions');
 // For troubleshooting, set the log level to DiagLogLevel.DEBUG
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
@@ -10,11 +10,11 @@ const { getNodeAutoInstrumentations, } = require('@opentelemetry/auto-instrument
 const { OTLPTraceExporter, } = require('@opentelemetry/exporter-trace-otlp-http');
 const { OTLPMetricExporter,} = require('@opentelemetry/exporter-metrics-otlp-http');
 const { PeriodicExportingMetricReader } = require('@opentelemetry/sdk-metrics');
-
+const { dockerCGroupV1Detector } = require('@opentelemetry/resource-detector-docker');
 const sdk = new opentelemetry.NodeSDK({
 
 resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'xmanager-api',
+    [SEMRESATTRS_SERVICE_NAME]: 'xmanager-api',
   }),
   
 traceExporter: new OTLPTraceExporter({
@@ -31,6 +31,7 @@ concurrencyLimit: 1, // an optional limit on pending requests
 }),
 }),
 instrumentations: [getNodeAutoInstrumentations()],
+resourceDetectors: [envDetector, ProcessDetector, dockerCGroupV1Detector, ],
 });
 sdk.start();
 
