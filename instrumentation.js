@@ -1,6 +1,6 @@
 /*instrumentation.js*/
 const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
-const { Resource, envDetector, ProcessDetector} = require('@opentelemetry/resources');
+const { Resource, envDetector, processDetector } = require('@opentelemetry/resources');
 const { SEMRESATTRS_SERVICE_NAME } = require('@opentelemetry/semantic-conventions');
 // For troubleshooting, set the log level to DiagLogLevel.DEBUG
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
