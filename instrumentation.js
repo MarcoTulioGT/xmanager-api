@@ -31,6 +31,7 @@ concurrencyLimit: 1, // an optional limit on pending requests
 }),
 }),
 instrumentations: [getNodeAutoInstrumentations()],
+resourceDetectors: [envDetector, ProcessDetector, ] ,
 });
 sdk.start();
 
