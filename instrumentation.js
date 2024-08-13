@@ -1,6 +1,6 @@
 /*instrumentation.js*/
 const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
-const { Resource, envDetector, ProcessDetector, DockerCGroupV1Detector} = require('@opentelemetry/resources');
+const { Resource, envDetector, ProcessDetector} = require('@opentelemetry/resources');
 const { SEMRESATTRS_SERVICE_NAME } = require('@opentelemetry/semantic-conventions');
 // For troubleshooting, set the log level to DiagLogLevel.DEBUG
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
@@ -10,14 +10,13 @@ const { getNodeAutoInstrumentations, } = require('@opentelemetry/auto-instrument
 const { OTLPTraceExporter, } = require('@opentelemetry/exporter-trace-otlp-http');
 const { OTLPMetricExporter,} = require('@opentelemetry/exporter-metrics-otlp-http');
 const { PeriodicExportingMetricReader } = require('@opentelemetry/sdk-metrics');
-const { dockerCGroupV1Detector } = require('@opentelemetry/resource-detector-docker');
 const sdk = new opentelemetry.NodeSDK({
 
 resource: new Resource({
     [SEMRESATTRS_SERVICE_NAME]: 'xmanager-api',
   })
-    //.merge(DockerCGroupV1Detector().detect()),
-  
+
+    
 traceExporter: new OTLPTraceExporter({
 // optional - default url is http://localhost:4318/v1/traces
 url: 'http://34.41.106.145:4318/v1/traces',
@@ -32,7 +31,6 @@ concurrencyLimit: 1, // an optional limit on pending requests
 }),
 }),
 instrumentations: [getNodeAutoInstrumentations()],
-//resourceDetectors: [envDetector, ProcessDetector, ],
 });
 sdk.start();
 
