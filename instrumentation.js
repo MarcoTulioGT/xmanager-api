@@ -25,7 +25,7 @@ headers: {},
 }),
 metricReader: new PeriodicExportingMetricReader({
 exporter: new OTLPMetricExporter({
-url: 'http://34.46.208.178:4318/v1/metrics', // url is optional and can be omitted - default is http://localhost:4318/v1/metrics
+url: 'http://34.41.106.145:4318/v1/metrics', // url is optional and can be omitted - default is http://localhost:4318/v1/metrics
 headers: {}, // an optional object containing custom headers to be sent with each request
 concurrencyLimit: 1, // an optional limit on pending requests
 }),
