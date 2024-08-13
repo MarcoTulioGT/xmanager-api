@@ -10,19 +10,13 @@ const { getNodeAutoInstrumentations, } = require('@opentelemetry/auto-instrument
 const { OTLPTraceExporter, } = require('@opentelemetry/exporter-trace-otlp-http');
 const { OTLPMetricExporter,} = require('@opentelemetry/exporter-metrics-otlp-http');
 const { PeriodicExportingMetricReader } = require('@opentelemetry/sdk-metrics');
-const { DockerCGroupV1Detector } = require('@opentelemetry/resource-detector-docker');
+const { dockerCGroupV1Detector } = require('@opentelemetry/resource-detector-docker');
 
-async function setupOpenTelemetry() {
-  // Detectar recursos automáticamente, incluyendo los proporcionados por DockerCGroupV1Detector
-  const resources = await detectResources({
-    detectors: [new DockerCGroupV1Detector()],
-  });
 
 const sdk = new opentelemetry.NodeSDK({
 
 resource: new Resource({
     [SEMRESATTRS_SERVICE_NAME]: 'xmanager-api',
-    resources,
   }),
 
 
@@ -41,9 +35,7 @@ concurrencyLimit: 1, // an optional limit on pending requests
 }),
 }),
 instrumentations: [getNodeAutoInstrumentations()],
-resourceDetectors: [envDetector, ProcessDetector, ] ,
+  resourceDetectors: [envDetector, processDetector, dockerCGroupV1Detector],
 });
 sdk.start();
-// Llamar a la función de configuración
-setupOpenTelemetry();
-// /*"start": "node --require ./instrumentation.js src/server.js"*/
+
