@@ -14,7 +14,7 @@ const sdk = new opentelemetry.NodeSDK({
 
 resource: new Resource({
     [SEMRESATTRS_SERVICE_NAME]: 'xmanager-api',
-  })
+  }),
 
     
 traceExporter: new OTLPTraceExporter({
